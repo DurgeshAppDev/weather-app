@@ -1,12 +1,14 @@
-import { View, Image, Text,Dimensions,TextInput } from 'react-native';
-import React from 'react';
+import { View, Image, Text,Dimensions,TextInput, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { theme } from '../theme';
+import {MagnifyingGlassIcon} from 'react-native-heroicons/outline';
 
 const { width, height } = Dimensions.get('screen');
 
 export default function HomeScreen() {
+  const [showSearch, toggleSearch] = useState(false);
   return (
     <View className="flex-1 relative">
         <StatusBar style="light"/>
@@ -23,7 +25,7 @@ export default function HomeScreen() {
         />
         
          <SafeAreaView style={{ flex: 1 }}>
-        
+      
         {/* Wrapper */}
         <View
           style={{
@@ -38,13 +40,15 @@ export default function HomeScreen() {
             style={{
               flexDirection: 'row',
               alignItems: 'center',
-              height: 48,                // ✅ IMPORTANT (fixes invisibility)
+              height: 48,              
               borderRadius: 50,
-              backgroundColor: 'rgba(255,255,255,0.2)', // ✅ visible glass effect
+              backgroundColor: showSearch? theme.bgWhite(0.2): 'transparent',
               width: '100%',
             }}
           >
-            <TextInput
+            {
+              showSearch?(
+                <TextInput
               placeholder="Search City"
               placeholderTextColor="lightgray"
               style={{
@@ -52,8 +56,18 @@ export default function HomeScreen() {
                 paddingHorizontal: 16,
                 color: 'white',
                 fontSize: 16,
-              }}
-            />
+              }} />
+              )
+              :null
+            }
+            <TouchableOpacity 
+            onPress={toggleSearch(!showSearch)}
+            style={{backgroundColor: theme.bgWhite(0.3)}}
+            className='rounded-full p-3 m-1'
+            >
+           <MagnifyingGlassIcon size='25' color='white' />
+            </TouchableOpacity>
+            
           </View>
 
         </View>
