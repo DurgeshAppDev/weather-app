@@ -5,6 +5,7 @@ import {
   Dimensions,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
@@ -12,6 +13,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { theme } from "../theme";
 
 import {
+  CalendarDaysIcon,
   MagnifyingGlassIcon,
   MapPinIcon,
 } from "react-native-heroicons/outline";
@@ -57,7 +59,7 @@ export default function HomeScreen() {
               <TextInput
                 placeholder="Search City"
                 placeholderTextColor="lightgray"
-                className="flex-1 pl-5 h-full text-base text-white"
+                className="flex-1 pl-5 h-full text-base text-white c"
               />
             )}
 
@@ -104,44 +106,139 @@ export default function HomeScreen() {
         <View className="mx-4 flex justify-around flex-1 mb-2">
           <Text className="text-white text-center text-2xl font-bold">
             Ludhiana,
-            <Text className="text-lg font-semibold text-gray-300"> 
-              India
-            </Text>
+            <Text className="text-lg font-semibold text-gray-300">India</Text>
           </Text>
           <View className="flex-row justify-center">
-            <Image 
-            source={require("../assets/images/partlycloudy.png")}
-            className="w-52 h-52"
+            <Image
+              source={require("../assets/images/partlycloudy.png")}
+              className="w-52 h-52"
             />
           </View>
           <View className="items-center">
-            <Text className="text-center font-bold text-white text-6xl"> 
-              23{"\u00B0"} </Text>
+            <Text className="text-center font-bold text-white text-6xl">
+              23{"\u00B0"}
+            </Text>
           </View>
 
           {/* stats of weather */}
-           <View className="flex-row justify-center mx-4">
+          <View className="flex-row justify-center mx-4 gap-x-10">
             <View className="flex-row items-center">
-            <Image 
-            source={require('../assets/icons/wind.png')}
-            className="w-6 h-6" />
-            <Text className="text-white font-semibold text-base ">  30km</Text>
+              <Image
+                source={require("../assets/icons/wind.png")}
+                className="w-6 h-6"
+              />
+              <Text className="text-white font-semibold text-base "> 30km</Text>
             </View>
             <View className="flex-row items-center">
-            <Image 
-            source={require('../assets/icons/drop.png')}
-            className="w-6 h-6" />
-            <Text className="text-white font-semibold text-base ">  30%</Text>
+              <Image
+                source={require("../assets/icons/drop.png")}
+                className="w-6 h-6"
+              />
+              <Text className="text-white font-semibold text-base "> 30%</Text>
             </View>
             <View className="flex-row items-center">
-            <Image 
-            source={require('../assets/icons/sun.png')}
-            className="w-6 h-6" />
-            <Text className="text-white font-semibold text-base ">  6:09am</Text>
+              <Image
+                source={require("../assets/icons/sun.png")}
+                className="w-6 h-6"
+              />
+              <Text className="text-white font-semibold text-base ">
+                6:09am
+              </Text>
             </View>
+          </View>
 
-           </View>
-
+          {/* next days forecastings programm */}
+          <View className="mb-2 gap-y-3">
+            <View className="flex-row items-center gap-x-2">
+              <CalendarDaysIcon size="22" color="white" />
+              <Text className="text-white font-semibold text-base">
+                Daily forecast
+              </Text>
+            </View>
+            <ScrollView
+              horizontal
+              contentContainerStyle={{ paddingHorizontal: 15 }}
+              showsHorizontalScrollIndicator={false}
+            >
+              <View
+                className="flex justify-center items-center rounded-3xl gap-y-2 p-2 mr-2"
+                style={{ backgroundColor: theme.bgWhite(0.15) }}
+              >
+                <Image
+                  source={require("../assets/images/heavyrain.png")}
+                  className="w-12 h-11"
+                />
+                <Text className="text-white">Monday</Text>
+                <Text className="text-white">20{"\u00B0"}</Text>
+              </View>
+              <View
+                className="flex justify-center items-center rounded-3xl gap-y-2 p-2 mr-2"
+                style={{ backgroundColor: theme.bgWhite(0.15) }}
+              >
+                <Image
+                  source={require("../assets/images/heavyrain.png")}
+                  className="w-12 h-11"
+                />
+                <Text className="text-white">Monday</Text>
+                <Text className="text-white">20{"\u00B0"}</Text>
+              </View>
+              <View
+                className="flex justify-center items-center rounded-3xl gap-y-2 p-2 mr-2"
+                style={{ backgroundColor: theme.bgWhite(0.15) }}
+              >
+                <Image
+                  source={require("../assets/images/heavyrain.png")}
+                  className="w-12 h-11"
+                />
+                <Text className="text-white">Monday</Text>
+                <Text className="text-white">20{"\u00B0"}</Text>
+              </View>
+              <View
+                className="flex justify-center items-center rounded-3xl gap-y-2 p-2 mr-2"
+                style={{ backgroundColor: theme.bgWhite(0.15) }}
+              >
+                <Image
+                  source={require("../assets/images/heavyrain.png")}
+                  className="w-12 h-11"
+                />
+                <Text className="text-white">Monday</Text>
+                <Text className="text-white">20{"\u00B0"}</Text>
+              </View>
+              <View
+                className="flex justify-center items-center rounded-3xl gap-y-2 p-2 mr-2"
+                style={{ backgroundColor: theme.bgWhite(0.15) }}
+              >
+                <Image
+                  source={require("../assets/images/heavyrain.png")}
+                  className="w-12 h-11"
+                />
+                <Text className="text-white">Monday</Text>
+                <Text className="text-white">20{"\u00B0"}</Text>
+              </View>
+              <View
+                className="flex justify-center items-center rounded-3xl gap-y-2 p-2 mr-2"
+                style={{ backgroundColor: theme.bgWhite(0.15) }}
+              >
+                <Image
+                  source={require("../assets/images/heavyrain.png")}
+                  className="w-12 h-11"
+                />
+                <Text className="text-white">Monday</Text>
+                <Text className="text-white">20{"\u00B0"}</Text>
+              </View>
+              <View
+                className="flex justify-center items-center rounded-3xl gap-y-2 p-2 mr-2"
+                style={{ backgroundColor: theme.bgWhite(0.15) }}
+              >
+                <Image
+                  source={require("../assets/images/heavyrain.png")}
+                  className="w-12 h-11"
+                />
+                <Text className="text-white">Monday</Text>
+                <Text className="text-white">20{"\u00B0"}</Text>
+              </View>
+            </ScrollView>
+          </View>
         </View>
       </SafeAreaView>
     </View>
