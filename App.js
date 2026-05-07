@@ -1,3 +1,4 @@
+import "./global.css";
 import { View } from 'react-native';
 import AppNavigation from './navigation/appNavigation';
 
