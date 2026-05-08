@@ -227,6 +227,7 @@ export default function HomeScreen() {
                 <Text className="text-white">Monday</Text>
                 <Text className="text-white">20{"\u00B0"}</Text>
               </View>
+              
               <View
                 className="flex justify-center items-center rounded-3xl gap-y-2 p-2 mr-2"
                 style={{ backgroundColor: theme.bgWhite(0.15) }}
