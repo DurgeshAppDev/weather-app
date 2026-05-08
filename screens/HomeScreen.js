@@ -7,27 +7,48 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { theme } from "../theme";
+import {debounce} from 'lodash'
 
 import {
   CalendarDaysIcon,
   MagnifyingGlassIcon,
   MapPinIcon,
 } from "react-native-heroicons/outline";
+import { fetchLocation, fetchWeatherForecast } from "../api/weather";
 
 const { width, height } = Dimensions.get("screen");
 
 export default function HomeScreen() {
   const [showSearch, toggleSearch] = useState(false);
   const [location, setLocation] = useState([1, 2, 3]);
+  const [weather, setWeather]  = useState({});
 
   const handleLocation = (loc) => {
-    console.log("Selected Location:", loc);
+    setLocation([]);
+    toggleSearch(false);
+    fetchWeatherForecast({
+      cityName: loc.name,
+      days: '7'
+    }).then(data=>{
+      setWeather(data);
+      console.log("got data ",data);
+    })
   };
 
+  const handleSearch = value =>{
+  if(value.length>2){
+    fetchLocation({cityName: value}).then(data=>{
+      setLocation(data);
+    })
+  }
+  }
+
+  const handleTextDebounce = useCallback(debounce(handleSearch,1000),[]);
+  const {current, location: Location} = weather;
   return (
     <View className="flex-1 relative">
       <StatusBar style="light" />
@@ -52,11 +73,13 @@ export default function HomeScreen() {
             className="flex-row items-center justify-end rounded-full px-2"
             style={{
               height: 52,
+              overflow:'hidden',
               backgroundColor: showSearch ? theme.bgWhite(0.2) : "transparent",
             }}
           >
             {showSearch && (
               <TextInput
+                onChangeText={handleTextDebounce}
                 placeholder="Search City"
                 placeholderTextColor="lightgray"
                 className="flex-1 pl-5 h-full text-base text-white c"
@@ -94,7 +117,7 @@ export default function HomeScreen() {
                     <MapPinIcon size={20} color="gray" />
 
                     <Text className="text-black text-lg ml-2">
-                      Ludhiana, India.
+                      {loc?.name}, {loc?.country}.
                     </Text>
                   </TouchableOpacity>
                 );
@@ -105,8 +128,8 @@ export default function HomeScreen() {
         {/* forecasting section */}
         <View className="mx-4 flex justify-around flex-1 mb-2">
           <Text className="text-white text-center text-2xl font-bold">
-            Ludhiana,
-            <Text className="text-lg font-semibold text-gray-300">India</Text>
+            {Location?.name},
+            <Text className="text-lg font-semibold text-gray-300">{" "+Location?.country}</Text>
           </Text>
           <View className="flex-row justify-center">
             <Image
